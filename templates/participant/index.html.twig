@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participant index{% endblock %}
+
+{% block body %}
+
+    {% set pagination = participants %}
+    {% if participants.totalItemCount < 30 %}
+        {% set pagination = query %}
+    {% endif %}
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Liste des Participants</h1>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <table class="table table-bordered table-hover table-striped table-responsive text-center">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Numero</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in pagination %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ item.nom }}</td>
+                    <td>{{ item.prenom }}</td>
+                    <td>{{ item.numero }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('app_participant_edit', {'id': item.id}) }}">modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Aucun Participant dans la base de donnee</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {{ knp_pagination_render(participants) }}
+
+        <a class="btn btn-primary" href="{{ path('app_participant_new') }}">Ajouter un Participant</a>
+    </div>
+{% endblock %}

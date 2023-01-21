@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier les information d'un participant{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Modifier les information d'un participant</h1>
+
+    <div class="container">
+
+        {{ include('participant/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+        <a class="btn btn-secondary my-4" href="{{ path('app_participant_index') }}">Retour au listing</a>
+
+        {{ include('participant/_delete_form.html.twig') }}
+
+    </div>
+{% endblock %}

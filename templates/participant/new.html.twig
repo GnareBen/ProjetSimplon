@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Participant{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Ajouter un Participant</h1>
+
+    <div class="container">
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {{ include('participant/_form.html.twig') }}
+        <a class="btn btn-secondary mt-4" href="{{ path('app_participant_index') }}">Retour au listing</a>
+    </div>
+
+
+{% endblock %}
