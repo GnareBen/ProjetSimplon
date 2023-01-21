@@ -43,7 +43,7 @@ class ParticipantController extends AbstractController
             $participant->setCreatedAt(new \DateTimeImmutable());
             $participantRepository->save($participant, true);
 
-            $this->addFlash('success', 'Participant ajouté avec succès !');
+            $this->addFlash('ajout', 'Participant ajouté avec succès !');
 
             return $this->redirectToRoute('app_participant_new', [], Response::HTTP_SEE_OTHER);
         }
@@ -70,6 +70,7 @@ class ParticipantController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $participantRepository->save($participant, true);
+            $this->addFlash('modification', 'Participant modifié avec succès !');
 
             return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -85,7 +86,7 @@ class ParticipantController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$participant->getId(), $request->request->get('_token'))) {
             $participantRepository->remove($participant, true);
-            $this->addFlash('success', 'Participant supprimé avec succès !');
+            $this->addFlash('suppression', 'Participant supprimé avec succès !');
         }
 
         return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
